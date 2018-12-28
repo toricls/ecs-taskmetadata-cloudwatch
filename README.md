@@ -5,4 +5,4 @@ This is an example project which puts your container-level metrics into CloudWat
 
 Pre-build docker image is available at a [Docker Hub repository](https://cloud.docker.com/repository/docker/toricls/ecs-taskmetadata-cloudwatch).
 
-TODO: Write more about usage
+TODO: Write more about usage including required IAM role permissions
