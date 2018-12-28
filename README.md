@@ -10,6 +10,7 @@ Pre-built docker image is available at a [Docker Hub repository](https://cloud.d
 To try, just run the pre-built container as a sidecar of your application container.
 
 NOTE
+- This project uses [Task Metadata Endpoint v3](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-metadata-endpoint-v3.html) and not works with v2
 - Fargate Platform Version v1.3.0 or later is required to work correctly with Fargate tasks
 - For EC2 launch type, this sample requires v1.21.0 or later of the Amazon ECS container agent
 - Windows container is not supported by this project for now
