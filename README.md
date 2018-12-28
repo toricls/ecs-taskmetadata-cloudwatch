@@ -8,7 +8,8 @@ This is an example project which puts your container-level metrics into CloudWat
 Pre-build docker image is available at a [Docker Hub repository](https://cloud.docker.com/repository/docker/toricls/ecs-taskmetadata-cloudwatch) to try quickly.
 
 NOTE
-- Fargate Platform Version 1.3 or later is required to work correctly with Fargate tasks
+- Fargate Platform Version v1.3.0 or later is required to work correctly with Fargate tasks
+- For EC2 launch type, this sample requires v1.21.0 or later of the Amazon ECS container agent
 - Windows container is not supported by this project for now
 
 :camera: screenshots :point_down:
