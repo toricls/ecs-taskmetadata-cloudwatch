@@ -1,6 +1,8 @@
 Amazon ECS Task Metadata :point_right: CloudWatch Custom Metrics
 =
 
+TODO: Write more about usage including required IAM role permissions
+
 This is an example project which puts your container-level metrics into CloudWatch on Amazon ECS and AWS Fargate.
 
 Pre-build docker image is available at a [Docker Hub repository](https://cloud.docker.com/repository/docker/toricls/ecs-taskmetadata-cloudwatch) to try quickly.
@@ -19,4 +21,3 @@ NOTE
 --
 ![Metrics](https://raw.githubusercontent.com/wiki/toricls/ecs-taskmetadata-cloudwatch/imgs/cw-metrics-3.png)
 
-TODO: Write more about usage including required IAM role permissions
