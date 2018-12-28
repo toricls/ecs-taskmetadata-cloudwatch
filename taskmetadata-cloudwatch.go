@@ -229,7 +229,7 @@ func main() {
 	}))
 	svc := cloudwatch.New(sess)
 
-	// store the pause container's ID if the task is running as a Fargate task
+	// store the pause container's ID if the task is running with awsvpc networking mode
 	pauseContainerId := ""
 	for _, con := range taskMetadata.Containers {
 		if isPauseContainer(con) {
