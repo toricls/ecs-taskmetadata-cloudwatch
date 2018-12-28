@@ -5,7 +5,9 @@ TODO: Write more about usage including required IAM role permissions
 
 This is an example project which puts your container-level metrics into CloudWatch on Amazon ECS and AWS Fargate.
 
-Pre-build docker image is available at a [Docker Hub repository](https://cloud.docker.com/repository/docker/toricls/ecs-taskmetadata-cloudwatch) to try quickly.
+Pre-built docker image is available at a [Docker Hub repository](https://cloud.docker.com/repository/docker/toricls/ecs-taskmetadata-cloudwatch) to try this quickly.
+
+To try, just run the pre-built container as a sidecar of your application container.
 
 NOTE
 - Fargate Platform Version v1.3.0 or later is required to work correctly with Fargate tasks
