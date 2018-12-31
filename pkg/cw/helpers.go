@@ -9,6 +9,7 @@ const (
 	nameSpace = "ECS/Containers"
 
 	metricNameMemoryUtilization = "MemoryUtilization"
+	metricNameCPUUtilization    = "CPUUtilization"
 )
 
 type metricData struct {
@@ -19,9 +20,27 @@ type metricData struct {
 }
 
 func PutMemoryUtilization(client *cloudwatch.CloudWatch, value float64, clusterName, containerName string) error {
-
 	input := &metricData{
 		MetricName: metricNameMemoryUtilization,
+		Unit:       cloudwatch.StandardUnitPercent,
+		Value:      value,
+		Dimensions: []*cloudwatch.Dimension{
+			&cloudwatch.Dimension{
+				Name:  aws.String("ClusterName"),
+				Value: aws.String(clusterName),
+			},
+			&cloudwatch.Dimension{
+				Name:  aws.String("ContainerName"),
+				Value: aws.String(containerName),
+			},
+		},
+	}
+	return putMetrics(client, input)
+}
+
+func PutCpuUtilization(client *cloudwatch.CloudWatch, value float64, clusterName, containerName string) error {
+	input := &metricData{
+		MetricName: metricNameCPUUtilization,
 		Unit:       cloudwatch.StandardUnitPercent,
 		Value:      value,
 		Dimensions: []*cloudwatch.Dimension{
