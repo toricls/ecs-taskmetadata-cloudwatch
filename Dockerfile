@@ -1,6 +1,7 @@
 FROM golang:1.11 as build-stage
 
-COPY vendor/ /go/src
+COPY vendor /go/src
+COPY ./pkg/ /go/src/github.com/toricls/ecs-taskmetadata-cloudwatch/pkg/
 COPY ./taskmetadata-cloudwatch.go /in/taskmetadata-cloudwatch.go
 
 RUN CGO_ENABLED=0 GO_PATH=/go go build -a -x -ldflags '-s' -o /out/taskmetadata-cloudwatch /in/taskmetadata-cloudwatch.go
