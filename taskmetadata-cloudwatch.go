@@ -20,7 +20,7 @@ import (
 )
 
 const (
-	interval = 5 * time.Second
+	interval = 10 * time.Second
 )
 
 var taskMetadata ecs.TaskResponse
@@ -86,7 +86,10 @@ func main() {
 							continue
 						}
 						if err := cw.PutMemoryUtilization(svc, docker.CalculateMemUtilization(conStats), taskMetadata.Cluster, containerIDToNameMap[key]); err != nil {
-							fmt.Fprintf(os.Stderr, "unable to put metrics: err [%v]\n", err)
+							fmt.Fprintf(os.Stderr, "unable to put memory utilization metrics: err [%v]\n", err)
+						}
+						if err := cw.PutCpuUtilization(svc, docker.CalculateCpuUtilization(conStats), taskMetadata.Cluster, containerIDToNameMap[key]); err != nil {
+							fmt.Fprintf(os.Stderr, "unable to put cpu utilization metrics: err [%v]\n", err)
 						}
 					}
 				}
