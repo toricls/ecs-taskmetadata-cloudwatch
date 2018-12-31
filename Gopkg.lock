@@ -2,33 +2,6 @@
 
 
 [[projects]]
-  branch = "master"
-  digest = "1:6da51e5ec493ad2b44cb04129e2d0a068c8fb9bd6cb5739d199573558696bb94"
-  name = "github.com/Azure/go-ansiterm"
-  packages = [
-    ".",
-    "winterm",
-  ]
-  pruneopts = "UT"
-  revision = "d6e3b3328b783f23731bc4d058875b0371ff8109"
-
-[[projects]]
-  digest = "1:f9ae348e1f793dcf9ed930ed47136a67343dbd6809c5c91391322267f4476892"
-  name = "github.com/Microsoft/go-winio"
-  packages = ["."]
-  pruneopts = "UT"
-  revision = "97e4973ce50b2ff5f09635a57e2b88a037aae829"
-  version = "v0.4.11"
-
-[[projects]]
-  branch = "master"
-  digest = "1:3721a10686511b80c052323423f0de17a8c06d417dbdd3b392b1578432a33aae"
-  name = "github.com/Nvveen/Gotty"
-  packages = ["."]
-  pruneopts = "UT"
-  revision = "cd527374f1e5bff4938207604a14f2e38a9cf512"
-
-[[projects]]
   digest = "1:ff80925293f1fe581d323a60d73faa25c5d376759cc3c97c3a51164139e3b449"
   name = "github.com/aws/aws-sdk-go"
   packages = [
@@ -68,16 +41,7 @@
   version = "v1.16.11"
 
 [[projects]]
-  branch = "master"
-  digest = "1:e48c63e818c67fbf3d7afe20bba33134ab1a5bf384847385384fd027652a5a96"
-  name = "github.com/containerd/continuity"
-  packages = ["pathdriver"]
-  pruneopts = "UT"
-  revision = "004b46473808b3e7a4a3049c20e4376c91eb966d"
-
-[[projects]]
-  branch = "master"
-  digest = "1:d0759c323b82746ce627e71ae0c327e46e150c3d8d78b00e5bb8faad05045d6d"
+  digest = "1:cedf588cb475ae52657a1abe442b1a104826aeb7ee334a468d9c64ca7d98108a"
   name = "github.com/docker/docker"
   packages = [
     "api/types",
@@ -92,16 +56,6 @@
     "api/types/swarm/runtime",
     "api/types/versions",
     "errdefs",
-    "opts",
-    "pkg/fileutils",
-    "pkg/homedir",
-    "pkg/idtools",
-    "pkg/ioutils",
-    "pkg/longpath",
-    "pkg/mount",
-    "pkg/pools",
-    "pkg/stdcopy",
-    "pkg/system",
   ]
   pruneopts = "UT"
   revision = "5ddb1d410a8b5ea35a6d57200b42582993f1e125"
@@ -123,32 +77,12 @@
   version = "v0.3.3"
 
 [[projects]]
-  digest = "1:3b4afe788202e2911355e54c30323ec56617c52015fcdff23380058f4cee8540"
-  name = "github.com/docker/libnetwork"
-  packages = ["ipamutils"]
-  pruneopts = "UT"
-  revision = "1a06131fb8a047d919f7deaf02a4c414d7884b83"
-
-[[projects]]
-  digest = "1:e4d1d8f3455dadab4e0f159acaff9075985ddaf6e807247923c088d964f1c845"
-  name = "github.com/fsouza/go-dockerclient"
-  packages = [
-    ".",
-    "internal/archive",
-    "internal/jsonmessage",
-    "internal/term",
-  ]
-  pruneopts = "UT"
-  revision = "f3bdb27a96799b10006a884ef2fed89284466276"
-  version = "v1.3.1"
-
-[[projects]]
-  digest = "1:9a688317f3231e0175b3429033f44411906c0ce119361b7b5019d01375f8cff7"
+  digest = "1:d059a146ab350e553c2687d3e17f198eb5b27c7cf55fe6ba0e2d21349df63388"
   name = "github.com/gogo/protobuf"
   packages = ["proto"]
   pruneopts = "UT"
-  revision = "1adfc126b41513cc696b209667c8656ea7aac67c"
-  version = "v1.0.0"
+  revision = "4cbf7e384e768b4e01799441fdf2a706a5635ae7"
+  version = "v1.2.0"
 
 [[projects]]
   digest = "1:bb81097a5b62634f3e9fec1014657855610c82d19b9a40c17612e32651e35dca"
@@ -156,14 +90,6 @@
   packages = ["."]
   pruneopts = "UT"
   revision = "c2b33e84"
-
-[[projects]]
-  digest = "1:0a69a1c0db3591fcefb47f115b224592c8dfa4368b7ba9fae509d5e16cdc95c8"
-  name = "github.com/konsorten/go-windows-terminal-sequences"
-  packages = ["."]
-  pruneopts = "UT"
-  revision = "5c8c8bd35d3832f5d134ae1e1e375b69a4d25242"
-  version = "v1.0.1"
 
 [[projects]]
   digest = "1:ee4d4af67d93cc7644157882329023ce9a7bcfce956a079069a9405521c7cc8d"
@@ -184,48 +110,6 @@
   revision = "d60099175f88c47cd379c4738d158884749ed235"
   version = "v1.0.1"
 
-[[projects]]
-  digest = "1:eecbbd6bfbfbe1acdad4b22c4fd530ab569df1634deef359e40d2ee4f85057f9"
-  name = "github.com/opencontainers/runc"
-  packages = ["libcontainer/user"]
-  pruneopts = "UT"
-  revision = "96ec2177ae841256168fcf76954f7177af9446eb"
-
-[[projects]]
-  digest = "1:40e195917a951a8bf867cd05de2a46aaf1806c50cf92eebf4c16f78cd196f747"
-  name = "github.com/pkg/errors"
-  packages = ["."]
-  pruneopts = "UT"
-  revision = "645ef00459ed84a119197bfb8d8205042c6df63d"
-  version = "v0.8.0"
-
-[[projects]]
-  digest = "1:69b1cc331fca23d702bd72f860c6a647afd0aa9fcbc1d0659b1365e26546dd70"
-  name = "github.com/sirupsen/logrus"
-  packages = ["."]
-  pruneopts = "UT"
-  revision = "bcd833dfe83d3cebad139e4a29ed79cb2318bf95"
-  version = "v1.2.0"
-
-[[projects]]
-  branch = "master"
-  digest = "1:38f553aff0273ad6f367cb0a0f8b6eecbaef8dc6cb8b50e57b6a81c1d5b1e332"
-  name = "golang.org/x/crypto"
-  packages = ["ssh/terminal"]
-  pruneopts = "UT"
-  revision = "505ab145d0a99da450461ae2c1a9f6cd10d1f447"
-
-[[projects]]
-  branch = "master"
-  digest = "1:3d5e79e10549fd9119cbefd614b6d351ef5bd0be2f2b103a4199788e784cbc68"
-  name = "golang.org/x/sys"
-  packages = [
-    "unix",
-    "windows",
-  ]
-  pruneopts = "UT"
-  revision = "b4a75ba826a64a70990f11a225237acd6ef35c9f"
-
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
@@ -233,7 +117,9 @@
     "github.com/aws/aws-sdk-go/aws",
     "github.com/aws/aws-sdk-go/aws/session",
     "github.com/aws/aws-sdk-go/service/cloudwatch",
-    "github.com/fsouza/go-dockerclient",
+    "github.com/docker/docker/api/types",
+    "github.com/opencontainers/go-digest",
+    "github.com/opencontainers/image-spec/specs-go",
   ]
   solver-name = "gps-cdcl"
   solver-version = 1
