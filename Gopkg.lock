@@ -118,8 +118,6 @@
     "github.com/aws/aws-sdk-go/aws/session",
     "github.com/aws/aws-sdk-go/service/cloudwatch",
     "github.com/docker/docker/api/types",
-    "github.com/opencontainers/go-digest",
-    "github.com/opencontainers/image-spec/specs-go",
   ]
   solver-name = "gps-cdcl"
   solver-version = 1
