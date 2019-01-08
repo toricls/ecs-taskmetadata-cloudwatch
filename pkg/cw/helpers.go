@@ -3,6 +3,8 @@ package cw
 import (
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/cloudwatch"
+	"github.com/docker/docker/api/types"
+	"github.com/toricls/ecs-taskmetadata-cloudwatch/pkg/docker"
 )
 
 const (
@@ -12,18 +14,12 @@ const (
 	metricNameCPUUtilization    = "CPUUtilization"
 )
 
-type metricData struct {
-	MetricName string
-	Unit       string
-	Value      float64
-	Dimensions []*cloudwatch.Dimension
-}
-
-func PutMemoryUtilization(client *cloudwatch.CloudWatch, value float64, clusterName, containerName string) error {
-	input := &metricData{
-		MetricName: metricNameMemoryUtilization,
-		Unit:       cloudwatch.StandardUnitPercent,
-		Value:      value,
+func GetMemoryUtilization(stats *types.Stats, clusterName, containerName string) (*cloudwatch.MetricDatum, error) {
+	value := docker.CalculateMemUtilization(stats)
+	d := &cloudwatch.MetricDatum{
+		MetricName: aws.String(metricNameMemoryUtilization),
+		Unit:       aws.String(cloudwatch.StandardUnitPercent),
+		Value:      aws.Float64(value),
 		Dimensions: []*cloudwatch.Dimension{
 			&cloudwatch.Dimension{
 				Name:  aws.String("ClusterName"),
@@ -35,14 +31,15 @@ func PutMemoryUtilization(client *cloudwatch.CloudWatch, value float64, clusterN
 			},
 		},
 	}
-	return putMetrics(client, input)
+	return d, nil
 }
 
-func PutCpuUtilization(client *cloudwatch.CloudWatch, value float64, clusterName, containerName string) error {
-	input := &metricData{
-		MetricName: metricNameCPUUtilization,
-		Unit:       cloudwatch.StandardUnitPercent,
-		Value:      value,
+func GetCpuUtilization(stats *types.Stats, clusterName, containerName string) (*cloudwatch.MetricDatum, error) {
+	value := docker.CalculateCpuUtilization(stats)
+	d := &cloudwatch.MetricDatum{
+		MetricName: aws.String(metricNameCPUUtilization),
+		Unit:       aws.String(cloudwatch.StandardUnitPercent),
+		Value:      aws.Float64(value),
 		Dimensions: []*cloudwatch.Dimension{
 			&cloudwatch.Dimension{
 				Name:  aws.String("ClusterName"),
@@ -54,20 +51,13 @@ func PutCpuUtilization(client *cloudwatch.CloudWatch, value float64, clusterName
 			},
 		},
 	}
-	return putMetrics(client, input)
+	return d, nil
 }
 
-func putMetrics(client *cloudwatch.CloudWatch, input *metricData) error {
+func PutMetrics(client *cloudwatch.CloudWatch, input ...*cloudwatch.MetricDatum) error {
 	_, err := client.PutMetricData(&cloudwatch.PutMetricDataInput{
-		Namespace: aws.String(nameSpace),
-		MetricData: []*cloudwatch.MetricDatum{
-			&cloudwatch.MetricDatum{
-				MetricName: aws.String(input.MetricName),
-				Unit:       aws.String(input.Unit),
-				Value:      aws.Float64(input.Value),
-				Dimensions: input.Dimensions,
-			},
-		},
+		Namespace:  aws.String(nameSpace),
+		MetricData: input,
 	})
 	return err
 }
