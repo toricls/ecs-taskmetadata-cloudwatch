@@ -9,8 +9,6 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/toricls/ecs-taskmetadata-cloudwatch/pkg/docker"
-
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/cloudwatch"
@@ -80,17 +78,30 @@ func main() {
 				if taskStats, err := ecs.GetTaskStats(client); err != nil {
 					fmt.Fprintf(os.Stderr, "unable to get task stats: %v\n", err)
 				} else {
+					var d []*cloudwatch.MetricDatum
+					clusterName := taskMetadata.Cluster
+					var containerName string
 					for key, conStats := range taskStats {
-						// ignore the CNI pause container's metrics or unreported
+						// We ignore the CNI pause container's metrics or a no-stats container
 						if key == pauseContainerId || conStats == nil {
 							continue
 						}
-						if err := cw.PutMemoryUtilization(svc, docker.CalculateMemUtilization(conStats), taskMetadata.Cluster, containerIDToNameMap[key]); err != nil {
-							fmt.Fprintf(os.Stderr, "unable to put memory utilization metrics: err [%v]\n", err)
+						containerName = containerIDToNameMap[key]
+						if data, _ := cw.GetMemoryUtilization(conStats, clusterName, containerName); data != nil {
+							d = append(d, data)
 						}
-						if err := cw.PutCpuUtilization(svc, docker.CalculateCpuUtilization(conStats), taskMetadata.Cluster, containerIDToNameMap[key]); err != nil {
-							fmt.Fprintf(os.Stderr, "unable to put cpu utilization metrics: err [%v]\n", err)
+						if data, _ := cw.GetCpuUtilization(conStats, clusterName, containerName); data != nil {
+							d = append(d, data)
 						}
+					}
+					if len(d) == 0 {
+						fmt.Print("nothing to report for now\n")
+						continue
+					}
+					// TODO: Validate the data size is under `40 KB for HTTP POST requests`.
+					//  see https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_limits.html
+					if err := cw.PutMetrics(svc, d...); err != nil {
+						fmt.Fprintf(os.Stderr, "unable to put metrics: err [%v]\n", err)
 					}
 				}
 			case sig := <-sigs:
